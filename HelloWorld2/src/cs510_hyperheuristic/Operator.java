@@ -1,4 +1,5 @@
 package cs510_hyperheuristic;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,9 +14,18 @@ public class Operator {
 		timeRange = new Range(start, stop);
 		bw = size;
 		validResources = new LinkedList<Resource>();
-		//for each available resource, if the name of the resources is in valid resourcenames, add to validResources
 		priority = p;
 		name = n;
+
+		//for each available resource, if the name of the resources is in valid resourcenames, add to validResources
+		Iterator<Resource> availResourceIterator = availableResources.iterator();
+		while(availResourceIterator.hasNext())
+		{
+			if(validResourceNames.contains(availResourceIterator.next().getName()))
+			{
+				validResources.add(availResourceIterator.next());
+			}
+		}
 	}
 	
 	public Range getRange()

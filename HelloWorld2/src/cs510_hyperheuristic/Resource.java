@@ -22,6 +22,7 @@ public class Resource {
 	public void addUser(Operator o) {
 		//adds the user to the allocator and list of users
 		allocator.allocateSpace(o.getRange(), o.getSize());
+		users.add(o);
 	}
 	
 	public String getName(){ 
