@@ -8,7 +8,7 @@ public class Simulation {
 
 		// generate simulation data
 		List<Resource> testResources = TestData.MakeResources(10);
-		List<User> testUsers = TestData.MakeUsers(100, testResources);
+		List<User> testUsers = TestData.MakeUsers(1000, testResources);
 		
 		// add users to resources
 		Schedule simSchedule = new Schedule(testResources, testUsers);
