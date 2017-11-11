@@ -1,4 +1,5 @@
 package cs510_hyperheuristic;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,7 +16,7 @@ public class PoolAllocator {
 		unallocatedSize = space;
 		allocatedSpace = new HashMap<Range, Double>();
 	}
-	
+/**	
 	public static void main(String[] args) {
 		PoolAllocator allocator = new PoolAllocator(100);
 		
@@ -37,7 +38,7 @@ public class PoolAllocator {
 		System.out.println(allocator.canAllocateSpace(block3Range, block3Size));
 		allocator.allocateSpace(block3Range, block3Size);
 	}
-	
+**/	
 	public boolean canAllocateSpace(Range range, double s) {
 		return s <= unallocatedSize && allocatedSpace.keySet().stream().filter(r -> r.overlaps(range)).allMatch(r -> allocatedSpace.get(r) + s <= unallocatedSize);
 	}

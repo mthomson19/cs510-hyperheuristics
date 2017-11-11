@@ -5,21 +5,22 @@ import java.util.List;
 public class Resource {
 	private PoolAllocator allocator;
 	private double maxBW;
-	private List<Operator> users;
+	private List<User> users;
 	private String name;
 	
-	public Resource(double size) {
+	public Resource(double size, String name) {
 		maxBW = size;
 		allocator = new PoolAllocator(maxBW);
-		users = new LinkedList<Operator>();
+		users = new LinkedList<User>();
+		this.name = name;
 	}
 	
-	public boolean canAddUser(Operator o) {
+	public boolean canAddUser(User o) {
 		//verifies with the allocator that we can add the user to this resources
-		return allocator.canAllocateSpace(o.getRange(), o.getSize());
+		return o.validResources.contains(this) && allocator.canAllocateSpace(o.getRange(), o.getSize());
 	}
 	
-	public void addUser(Operator o) {
+	public void addUser(User o) {
 		//adds the user to the allocator and list of users
 		allocator.allocateSpace(o.getRange(), o.getSize());
 		users.add(o);
