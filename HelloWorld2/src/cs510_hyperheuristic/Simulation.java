@@ -7,11 +7,14 @@ public class Simulation {
 	public static void main(String[] args) {
 
 		// generate simulation data
-		List<Resource> testResources = TestData.MakeResources(10);
-		List<User> testUsers = TestData.MakeUsers(1000, testResources);
+		List<Resource> testResources = TestData.MakeResources(3);
+		List<User> testUsers = TestData.MakeUsers(3, testResources);
 		
-		// add users to resources
-		Schedule simSchedule = new Schedule(testResources, testUsers);
+		// generate initial empty schedule
+		Schedule rootSchedule = new Schedule(testResources, testUsers);
+		
+		// generate tree
+		List<Schedule> level1Schedule = rootSchedule.getChildren();
 	}
 
 }
