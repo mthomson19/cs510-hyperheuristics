@@ -12,33 +12,17 @@ import java.util.stream.Collectors;
 public class PoolAllocator {
 	private Map<Range, Double> allocatedSpace;
 	public double unallocatedSize;
+
 	public PoolAllocator(double space) {
 		unallocatedSize = space;
 		allocatedSpace = new HashMap<Range, Double>();
 	}
-/**	
-	public static void main(String[] args) {
-		PoolAllocator allocator = new PoolAllocator(100);
-		
-		Range block1Range = new Range(0, 100);
-		double block1Size = 50;
-		
-		Range block2Range = new Range(50, 100);
-		double block2Size = 50;
-		
-		Range block3Range = new Range(30, 51);
-		double block3Size = 10;
-		
-		System.out.println(allocator.canAllocateSpace(block1Range, block1Size));
-		allocator.allocateSpace(block1Range, block1Size);
-		
-		System.out.println(allocator.canAllocateSpace(block2Range, block2Size));
-		allocator.allocateSpace(block2Range, block2Size);
-		
-		System.out.println(allocator.canAllocateSpace(block3Range, block3Size));
-		allocator.allocateSpace(block3Range, block3Size);
+
+	public PoolAllocator(PoolAllocator original) {
+		unallocatedSize = original.unallocatedSize;
+		allocatedSpace = new HashMap<Range, Double>(original.allocatedSpace);
 	}
-**/	
+
 	public boolean canAllocateSpace(Range range, double s) {
 		return s <= unallocatedSize && allocatedSpace.keySet().stream().filter(r -> r.overlaps(range)).allMatch(r -> allocatedSpace.get(r) + s <= unallocatedSize);
 	}

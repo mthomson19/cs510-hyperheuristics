@@ -41,7 +41,13 @@ public class Schedule {
 	
 	public void addUser(Resource r, User u)
 	{
+		r.addUser(u);
 		userAllocation.put(u.getName(), r.getName());
+	}
+	
+	public boolean equals(Schedule sch1, Schedule sch2)
+	{
+		return sch1.userAllocation.equals(sch2.userAllocation);
 	}
 	
 	public List<Schedule> getChildren()
@@ -57,7 +63,6 @@ public class Schedule {
 				// determine if user can be added to resource
 				if(r.canAddUser(u))
 				{
-					r.addUser(u);
 					Schedule copy = new Schedule(this);
 					copy.addUser(r, u);
 					children.add(copy);

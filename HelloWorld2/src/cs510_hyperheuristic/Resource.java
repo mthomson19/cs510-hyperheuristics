@@ -15,6 +15,13 @@ public class Resource {
 		this.name = name;
 	}
 	
+	public Resource(Resource original) {
+		allocator = new PoolAllocator(original.allocator);;
+		maxBW = original.maxBW;
+		users = new LinkedList<User>(original.users);;
+		name = original.name;
+	}
+	
 	public boolean canAddUser(User o) {
 		//verifies with the allocator that we can add the user to this resources
 		return o.validResources.contains(this) && allocator.canAllocateSpace(o.getRange(), o.getSize());
