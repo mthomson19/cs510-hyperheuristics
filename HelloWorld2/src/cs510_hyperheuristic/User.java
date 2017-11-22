@@ -1,4 +1,5 @@
 package cs510_hyperheuristic;
+
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -44,6 +45,11 @@ public class User {
 	
 	public String getName()
 	{
+		return name;
+	}
+	
+	@Override
+	public String toString() {
 		return name;
 	}
 }

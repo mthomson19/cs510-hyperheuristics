@@ -1,4 +1,6 @@
 package cs510_hyperheuristic;
+
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,9 +18,9 @@ public class Resource {
 	}
 	
 	public Resource(Resource original) {
-		allocator = new PoolAllocator(original.allocator);;
+		allocator = new PoolAllocator(original.allocator);
 		maxBW = original.maxBW;
-		users = new LinkedList<User>(original.users);;
+		users = new LinkedList<User>(original.users);
 		name = original.name;
 	}
 	
@@ -35,6 +37,20 @@ public class Resource {
 	
 	public String getName(){ 
 		return name;
+	}
+	
+	@Override
+	public String toString() {
+		return name;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Resource) {
+			Resource r = (Resource) o;
+			return name.equals(r.name) && users.equals(r.users);
+		}
+		return false;
 	}
 	
 }

@@ -1,6 +1,8 @@
 package cs510_hyperheuristic;
 
+
 import java.util.List;
+import java.util.PriorityQueue;
 
 public class Simulation {
 
@@ -10,37 +12,31 @@ public class Simulation {
 		List<Resource> testResources = TestData.MakeResources(3);
 		List<User> testUsers = TestData.MakeUsers(3, testResources);
 		
-		// generate initial empty schedule
-		Schedule rootSchedule = new Schedule(testResources, testUsers);
+		int score = 0;
+		int maxIterations = 500;
+		double weights[] = {0.9, 0.8};
+
 		
-		// generate tree
-		List<Schedule> level1Schedule = rootSchedule.getChildren();
-		List<Schedule> level2Schedule = level1Schedule.getChildren();
-		List<Schedule> level3Schedule = level2Schedule.getChildren();
+		PriorityQueue<Schedule> q = new PriorityQueue<Schedule>();
+		HeuristicGenerator hg = new HeuristicGenerator(weights);		
+		//PriorityQueue<Schedule> q = new PriorityQueue<Schedule>((s1, s2) -> Double.compare(s2.getScore() + hg.getHeuristic(s2), s1.getScore() + hg.getHeuristic(s1)));
+		q.offer(new Schedule(testResources, testUsers));
+		Schedule best = q.peek();
+		for (int i = 0; i < maxIterations && !q.isEmpty(); i++) {
+			Schedule s = q.poll();
+			for (Schedule c : s.getChildren()) {
+				q.offer(c);
+			}
+			if (s.compareTo(best) < 0) {
+				best = s;
+			}
+			score--;
+		}
+		
+		double hscore = hg.getHeuristic(best);
+		
+		System.out.println(best + " is the best schedule");
+		System.out.println(score);
 	}
 
 }
-
-/**	
-public static void main(String[] args) {
-	PoolAllocator allocator = new PoolAllocator(100);
-	
-	Range block1Range = new Range(0, 100);
-	double block1Size = 50;
-	
-	Range block2Range = new Range(50, 100);
-	double block2Size = 50;
-	
-	Range block3Range = new Range(30, 51);
-	double block3Size = 10;
-	
-	System.out.println(allocator.canAllocateSpace(block1Range, block1Size));
-	allocator.allocateSpace(block1Range, block1Size);
-	
-	System.out.println(allocator.canAllocateSpace(block2Range, block2Size));
-	allocator.allocateSpace(block2Range, block2Size);
-	
-	System.out.println(allocator.canAllocateSpace(block3Range, block3Size));
-	allocator.allocateSpace(block3Range, block3Size);
-}
-**/	

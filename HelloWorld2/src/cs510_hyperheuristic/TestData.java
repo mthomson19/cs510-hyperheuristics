@@ -1,5 +1,6 @@
 package cs510_hyperheuristic;
 
+
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Collections;
@@ -15,7 +16,7 @@ public class TestData {
 	
 	public static List<Resource> MakeResources(int quanity)
 	{
-		double maxBW = 100;	// 100 percent available
+		double maxBW = 4;	// 100 percent available
 		String name;
 		List<Resource> resourceTestData = new LinkedList<Resource>();
 		

@@ -1,13 +1,15 @@
 package cs510_hyperheuristic;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class Schedule {
+public class Schedule implements Comparable<Schedule>
+{
 	private List<Resource> resources;
 	private List<User> users;
-	private Map<String, String> userAllocation;
+	public Map<User, Resource> userAllocation;
 	private double score;
 	
 	
@@ -22,16 +24,19 @@ public class Schedule {
 		// make a copy of resources and users for each schedule
 		resources = new LinkedList<Resource>(Resources);
 		users = new LinkedList<User>(Users);
-		userAllocation = new HashMap<String,String>();
+		userAllocation = new HashMap<User,Resource>();
 		score = 0;
 	}
 
 	public Schedule(Schedule original)
 	{
 		// make a copy of the original schedule
-		resources = new LinkedList<Resource>(original.resources);
+		resources = new LinkedList<Resource>();
+		for (Resource r : original.resources) {
+			resources.add(new Resource(r));
+		}
 		users = new LinkedList<User>(original.users);
-		userAllocation = new HashMap<String,String>(original.userAllocation);
+		userAllocation = new HashMap<User,Resource>(original.userAllocation);
 		score = original.score;
 	}
 	
@@ -42,34 +47,44 @@ public class Schedule {
 	public void addUser(Resource r, User u)
 	{
 		r.addUser(u);
-		userAllocation.put(u.getName(), r.getName());
+		userAllocation.put(u, r);
+		users.remove(u);
+		score += 1;
 	}
 	
-	public boolean equals(Schedule sch1, Schedule sch2)
-	{
-		return sch1.userAllocation.equals(sch2.userAllocation);
-	}
 	
 	public List<Schedule> getChildren()
 	{
 		List<Schedule> children = new LinkedList<Schedule>();
-		
 		// traverse all resources
-		for(Resource r: resources)
+		Schedule copy = new Schedule(this);
+		for(int i = 0; i < copy.resources.size(); i++)
 		{
+			Resource r = copy.resources.get(i);
 			// traverse all users
-			for(User u: users)
+			for(int j = 0; j < copy.users.size(); j++)
 			{
+				User u = copy.users.get(j);
 				// determine if user can be added to resource
 				if(r.canAddUser(u))
 				{
-					Schedule copy = new Schedule(this);
 					copy.addUser(r, u);
 					children.add(copy);
+					copy = new Schedule(this);
 				}
 			}
 		}
 		return children;		
+	}
+
+	@Override
+	public int compareTo(Schedule otherSchedule) {
+		return -Double.compare(score, otherSchedule.score);
+	}
+	
+	@Override
+	public String toString() {
+		return userAllocation.toString();
 	}
 
 }
