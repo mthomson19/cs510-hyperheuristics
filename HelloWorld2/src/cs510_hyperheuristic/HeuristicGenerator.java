@@ -1,6 +1,5 @@
 package cs510_hyperheuristic;
 
-
 public class HeuristicGenerator {
 	public double[] weights;
 	
@@ -9,10 +8,17 @@ public class HeuristicGenerator {
 	}
 	
 	// count the number of users
-	private double baseHeuristic0(Schedule s){
-		int count = s.userAllocation.size();
-		
-		return 0.7;
+	/*private double baseHeuristic0(Schedule s){
+		//return s.userAllocation.size() / Simulation.getUserQuanity();
+		return 0;
+	}*/
+	
+	//heuristic says how much is left
+	private double baseHeuristic0(Schedule s) {
+		if (s.mostRecentResource != null && s.mostRecentUser != null) {
+			return s.mostRecentResource.getRemainingSpace(s.mostRecentUser.getRange());
+		}
+		return 0;
 	}
 	
 	// summarize the priority of the users allocated
@@ -20,24 +26,25 @@ public class HeuristicGenerator {
 		int totalPriority = 0;
 		for(User key : s.userAllocation.keySet())
 		{
-			totalPriority =+ key.getPriority();
+			totalPriority += key.getPriority();
 		}
-		return 0.2;
+		return totalPriority / Simulation.getUserQuanity() * 10;
 	}
 	
 	// determine the percentage of total bandwidth allocated
 	private double baseHeuristic2(Schedule s) {
-		double totalMaxBW = 100 * s.userAllocation.size();
+		/*double totalMaxBW = 100 * Simulation.resourceQuanity;
 		double totalUsedBW = 0;
 		
 		for(User key : s.userAllocation.keySet())
 		{
-			totalUsedBW =+ key.getSize();
+			totalUsedBW += key.getSize();
 		}
-		return totalUsedBW / totalMaxBW;
+		return totalUsedBW / totalMaxBW;*/
+		return 0;
 	}
 	
 	public double getHeuristic(Schedule s) {
-		return weights[0] * baseHeuristic0(s) + weights[1] * baseHeuristic1(s) + weights[2] * baseHeuristic2(s);
+		return weights[0] * baseHeuristic0(s);// weights[0] * baseHeuristic0(s) + weights[1] * baseHeuristic1(s) + weights[2] * baseHeuristic2(s);
 	}
 }

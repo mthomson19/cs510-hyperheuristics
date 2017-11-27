@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 //if given a range and a height, computes that the overlap does not exceed a value
 //runs in O(n) with linear memory allocation
 public class PoolAllocator {
-	private Map<Range, Double> allocatedSpace;
+	public Map<Range, Double> allocatedSpace;
 	public double unallocatedSize;
 
 	public PoolAllocator(double space) {

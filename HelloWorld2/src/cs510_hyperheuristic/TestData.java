@@ -1,6 +1,5 @@
 package cs510_hyperheuristic;
 
-
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Collections;
@@ -16,7 +15,7 @@ public class TestData {
 	
 	public static List<Resource> MakeResources(int quanity)
 	{
-		double maxBW = 4;	// 100 percent available
+		double maxBW = 100;	// 100 percent available
 		String name;
 		List<Resource> resourceTestData = new LinkedList<Resource>();
 		
@@ -53,13 +52,13 @@ public class TestData {
 			stop = start.plusHours((long) duration);
 			startValue = start.toEpochSecond(ZoneOffset.UTC);
 			stopValue = stop.toEpochSecond(ZoneOffset.UTC);
-			size = random.nextInt(5 - 1) + 1;		// between 1 and 5 percent
+			size = random.nextInt(20 - 10) + 10;		// between 1 and 5 percent
 			priority = random.nextInt(10 - 1) + 1;	// between 1 and 10
 			name = "Operator"+i;
 			Collections.shuffle(availableResources);
-			subAvailResources = availableResources.subList(0, 3);
+			subAvailResources = availableResources.subList(0, random.nextInt(availableResources.size()));
 			
-			for(int j=0; j<3; j++)
+			for(int j=0; j<subAvailResources.size(); j++)
 			{
 				validResourceNames.add(subAvailResources.get(j).getName());
 			}
