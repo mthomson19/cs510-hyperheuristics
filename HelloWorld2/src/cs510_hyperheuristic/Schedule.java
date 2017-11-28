@@ -46,6 +46,10 @@ public class Schedule implements Comparable<Schedule>
 		return score;
 	}
 	
+	public Map<User, Resource> getUserAllocation() {
+		return userAllocation;
+	}
+
 	public void addUser(Resource r, User u)
 	{
 		r.addUser(u);
@@ -92,6 +96,10 @@ public class Schedule implements Comparable<Schedule>
 	@Override
 	public String toString() {
 		return userAllocation.toString();
+	}
+	
+	public boolean equal(Schedule otherSchedule) {
+		return userAllocation.equals(otherSchedule.getUserAllocation());
 	}
 
 }

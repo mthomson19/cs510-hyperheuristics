@@ -45,7 +45,7 @@ public class Simulation {
 		return score + best.getScore();
 	}
 
-
+/*
 	public static void main(String[] args) {
 
 
@@ -79,5 +79,5 @@ public class Simulation {
 		System.out.println(best + " is the best schedule");
 		System.out.println(score);
 	}
-
+*/
 }
