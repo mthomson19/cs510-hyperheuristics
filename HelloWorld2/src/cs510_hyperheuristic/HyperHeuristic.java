@@ -10,8 +10,8 @@ public class HyperHeuristic {
 		//run hill climbing on simulation result.
 		
 		double[] weights = {0, 0, 0};
-		List<Resource> resources = TestData.MakeResources(2);
-		List<User> users = TestData.MakeUsers(300, resources);
+		List<Resource> resources = TestData.MakeResources(4);
+		List<User> users = TestData.MakeUsers(600, resources);
 		
 		System.out.println(Simulation.Simulate(weights, resources, users, 1000));
 		weights[0] = 0.5;
