@@ -23,12 +23,12 @@ public class HeuristicGenerator {
 	
 	// summarize the priority of the users allocated
 	private double baseHeuristic1(Schedule s) {
-		int totalPriority = 0;
+		/*int totalPriority = 0;
 		for(User key : s.userAllocation.keySet())
 		{
 			totalPriority += key.getPriority();
 		}
-		return totalPriority / Simulation.getUserQuanity() * 10;
+		return totalPriority / Simulation.getUserQuanity() * 10;*/return 0;
 	}
 	
 	// determine the percentage of total bandwidth allocated

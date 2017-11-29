@@ -98,8 +98,13 @@ public class Schedule implements Comparable<Schedule>
 		return userAllocation.toString();
 	}
 	
-	public boolean equal(Schedule otherSchedule) {
-		return userAllocation.equals(otherSchedule.getUserAllocation());
+	@Override
+	public boolean equals(Object o) {
+		if(o instanceof Schedule) {
+			Schedule s = (Schedule) o;
+			return s.getUserAllocation().equals(userAllocation);
+		}
+		return false;
 	}
 
 }
