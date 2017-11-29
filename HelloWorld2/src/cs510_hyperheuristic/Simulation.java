@@ -30,7 +30,9 @@ public class Simulation {
 		for (int i = 0; !solved && i < maxIterations && !q.isEmpty(); i++) {
 			Schedule s = q.poll();
 			for (Schedule c : s.getChildren()) {
-				q.offer(c);
+				if(!c.equals(s)) {
+					q.offer(c);					
+				}
 			}
 			if (s.compareTo(best) > 0) {
 				best = s;
@@ -47,7 +49,7 @@ public class Simulation {
 		return solved ? score + (testUsers.size() * 10) : best.getScore();
 	}
 
-
+/*
 	public static void main(String[] args) {
 
 
@@ -81,5 +83,5 @@ public class Simulation {
 		System.out.println(best + " is the best schedule");
 		System.out.println(score);
 	}
-
+*/
 }
