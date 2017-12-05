@@ -6,12 +6,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-//this handles adding blocks to a schedule
-//if given a range and a height, computes that the overlap does not exceed a value
-//runs in O(n) with linear memory allocation
 /**
  * @author Andrew Miller, Marc Thomson
  *
+ * this handles adding blocks to a schedule
+ * if given a range and a height, computes that the overlap does not exceed a value
+ * runs in O(n) with linear memory allocation
+ * 
  */
 public class PoolAllocator {
 	public Map<Range, Double> allocatedSpace;

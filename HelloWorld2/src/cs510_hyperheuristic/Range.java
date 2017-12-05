@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-//a range describes two values, a start and a stop.
-//it contains many of the useful functions for ranges, such as intersections, union, subtraction, etc.
 /**
  * @author Andrew Miller, Marc Thomson
  *
+ * a range describes two values, a start and a stop.
+ * it contains many of the useful functions for ranges, such as intersections, union, subtraction, etc.
+ * 
  */
 public class Range {
 	public double start;

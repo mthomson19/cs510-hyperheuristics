@@ -34,9 +34,11 @@ public class Schedule implements Comparable<Schedule> {
 	public Schedule(Schedule original) {
 		// make a copy of the original schedule
 		resources = new LinkedList<Resource>();
+
 		for (Resource r : original.resources) {
 			resources.add(new Resource(r));
 		}
+
 		users = original.users;
 		userAllocation = new HashMap<User, Resource>(original.userAllocation);
 		score = original.score;
@@ -56,13 +58,16 @@ public class Schedule implements Comparable<Schedule> {
 
 	public List<Schedule> getChildren() {
 		List<Schedule> children = new LinkedList<Schedule>();
+
 		// traverse all resources
 		Schedule copy = new Schedule(this);
 		for (int i = 0; i < copy.resources.size(); i++) {
 			Resource r = copy.resources.get(i);
+
 			// traverse all users
 			for (int j = 0; j < copy.users.size(); j++) {
 				User u = copy.users.get(j);
+
 				if (!copy.userAllocation.keySet().contains(u)) {
 
 					// determine if user can be added to resource
@@ -93,6 +98,7 @@ public class Schedule implements Comparable<Schedule> {
 
 	@Override
 	public boolean equals(Object o) {
+
 		if (o instanceof Schedule) {
 			Schedule s = (Schedule) o;
 			return s.getUserAllocation().equals(userAllocation);

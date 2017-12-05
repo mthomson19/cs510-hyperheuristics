@@ -28,8 +28,6 @@ public class HeuristicGenerator {
 	}
 
 	public double getHeuristic(Schedule s) {
-		return weights[0] * baseHeuristic0(s) + weights[1] * baseHeuristic1(s);// weights[0] * baseHeuristic0(s) +
-																				// weights[1] * baseHeuristic1(s) +
-																				// weights[2] * baseHeuristic2(s);
+		return weights[0] * baseHeuristic0(s) + weights[1] * baseHeuristic1(s);
 	}
 }
