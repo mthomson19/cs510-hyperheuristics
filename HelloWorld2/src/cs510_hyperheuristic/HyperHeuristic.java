@@ -11,17 +11,14 @@ public class HyperHeuristic {
 		//run simulation with random heuristic
 		//run hill climbing on simulation result.
 		
-		double[] weights = {0, 0, 0};
 		List<List<Resource>> resourceGroups = new LinkedList<List<Resource>>();
 		List<List<User>> userGroups = new LinkedList<List<User>>();
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 20; i++) {
 			resourceGroups.add(TestData.MakeResources(3));
-			userGroups.add(TestData.MakeUsers(100, resourceGroups.get(i)));
+			userGroups.add(TestData.MakeUsers(300, resourceGroups.get(i)));
 		}
-		double[] optimal = weightClimb(resourceGroups, userGroups, 2, .001, 2, 1000);
+		double[] optimal = weightClimb(resourceGroups, userGroups, 2, .001, 1.1, 1000);
 		System.out.println(Arrays.toString(optimal));
-		//double[] trialWeights = {0.129, 0, 0};
-		//System.out.println(getAverageScore(trialWeights, resourceGroups, userGroups, 1000));
 	}
 	
 	public static double[] weightClimb(List<List<Resource>> resourceGroups, List<List<User>> userGroups, double initialStep, double accuracy, double falloff, int depth) {

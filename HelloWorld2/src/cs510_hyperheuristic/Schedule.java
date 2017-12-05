@@ -46,15 +46,10 @@ public class Schedule implements Comparable<Schedule>
 		return score;
 	}
 	
-	public Map<User, Resource> getUserAllocation() {
-		return userAllocation;
-	}
-
 	public void addUser(Resource r, User u)
 	{
 		r.addUser(u);
 		userAllocation.put(u, r);
-		//users.remove(u);
 		score += u.getPriority();
 		mostRecentUser = u;
 		mostRecentResource = r;
@@ -88,6 +83,10 @@ public class Schedule implements Comparable<Schedule>
 		return children;		
 	}
 
+	public Map<User, Resource> getUserAllocation() {
+		return userAllocation;
+	}
+	
 	@Override
 	public int compareTo(Schedule otherSchedule) {
 		return Double.compare(score, otherSchedule.score);

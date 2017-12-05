@@ -1,9 +1,5 @@
 package cs510_hyperheuristic;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class Resource {
 	private PoolAllocator allocator;
 	private double maxBW;
@@ -30,7 +26,7 @@ public class Resource {
 	
 	public boolean canAddUser(User o) {
 		//verifies with the allocator that we can add the user to this resources
-		return /*o.validResources.contains(this) && */allocator.canAllocateSpace(o.getRange(), o.getSize());
+		return o.validResources.contains(this) && allocator.canAllocateSpace(o.getRange(), o.getSize());
 	}
 	
 	public void addUser(User o) {

@@ -6,14 +6,14 @@ import java.util.List;
 public class User {
 	private Range timeRange; //the start and stop time of the user
 	private double bw;  //the amount of bandwidth this user needs
-	//List<Resource> validResources; //a list of resources this user can be scheduled under
+	List<Resource> validResources; //a list of resources this user can be scheduled under
 	private int priority; //the priority of this user.  1 is highest priority, 10 is lowest
 	private String name; //the name of the operator
 	
 	public User(double start, double stop, double size, int p, String n,List<String> validResourceNames, List<Resource> availableResources) {
 		timeRange = new Range(start, stop);
 		bw = size;
-	//	validResources = new LinkedList<Resource>();
+		validResources = new LinkedList<Resource>();
 		priority = p;
 		name = n;
 
@@ -22,7 +22,7 @@ public class User {
 		{
 			if(validResourceNames.contains(r.getName()))
 			{
-				//validResources.add(r);
+				validResources.add(r);
 			}
 		}
 	}
