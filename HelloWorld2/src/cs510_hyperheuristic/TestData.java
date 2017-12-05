@@ -7,30 +7,30 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * @author Andrew Miller, Marc Thomson
+ *
+ */
 public class TestData {
-	
-	public TestData()
-	{
+
+	public TestData() {
 	}
-	
-	public static List<Resource> MakeResources(int quanity)
-	{
-		double maxBW = 100;	// 100 percent available
+
+	public static List<Resource> MakeResources(int quanity) {
+		double maxBW = 100; // 100 percent available
 		String name;
 		List<Resource> resourceTestData = new LinkedList<Resource>();
-		
-		// generate  Resources
-		for(int i=0; i<quanity; i++)
-		{
-			name = "Resource"+i;
+
+		// generate Resources
+		for (int i = 0; i < quanity; i++) {
+			name = "Resource" + i;
 			Resource resource = new Resource(maxBW, name);
 			resourceTestData.add(resource);
 		}
 		return resourceTestData;
 	}
-	
-	public static List<User> MakeUsers(int quanity, List<Resource> availableResources)
-	{
+
+	public static List<User> MakeUsers(int quanity, List<Resource> availableResources) {
 		double duration;
 		LocalDateTime start;
 		LocalDateTime stop;
@@ -43,30 +43,29 @@ public class TestData {
 		List<Resource> subAvailResources = new LinkedList<Resource>();
 		List<User> operatorTestData = new LinkedList<User>();
 		Random random = new Random();
-		
-		// generate  Users
-		for(int i=0; i<quanity; i++)
-		{
+
+		// generate Users
+		for (int i = 0; i < quanity; i++) {
 			duration = random.nextDouble() * 2 + 1;
-			start = LocalDateTime.now().plusHours(random.nextInt(24 - 3)); 
+			start = LocalDateTime.now().plusHours(random.nextInt(24 - 3));
 			stop = start.plusHours((long) duration);
 			startValue = start.toEpochSecond(ZoneOffset.UTC);
 			stopValue = stop.toEpochSecond(ZoneOffset.UTC);
-			size = random.nextInt(20 - 10) + 10;		// between 1 and 5 percent
-			priority = random.nextInt(10 - 1) + 1;	// between 1 and 10
-			name = "Operator"+i;
+			size = random.nextInt(20 - 10) + 10; // between 1 and 5 percent
+			priority = random.nextInt(10 - 1) + 1; // between 1 and 10
+			name = "Operator" + i;
 			Collections.shuffle(availableResources);
 			subAvailResources = availableResources.subList(0, random.nextInt(availableResources.size()));
-			
-			for(int j=0; j<subAvailResources.size(); j++)
-			{
+
+			for (int j = 0; j < subAvailResources.size(); j++) {
 				validResourceNames.add(subAvailResources.get(j).getName());
 			}
 
-			User operator = new User(startValue, stopValue, size, priority, name, validResourceNames, availableResources);
-			
+			User operator = new User(startValue, stopValue, size, priority, name, validResourceNames,
+					availableResources);
+
 			operatorTestData.add(operator);
-			
+
 		}
 
 		return operatorTestData;
